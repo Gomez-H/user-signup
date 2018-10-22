@@ -2,37 +2,69 @@
 
 
 {% block content %}
-<h2>Signup</h2>
 
-    <form action="/signup" method="post">
+
+    <form action="/signup" method='post'>
         <label for="username">
-            Username:
-            <input type="text" id="username" name="username"/>
-          </label><br><br>
-
+            Username:</label>
+            <input type="text" id="username" name="username" value="{{new_user}}"/>
+        
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        
+        {% for category,message in messages%}
+        {% if category == 'us' %}
+        <span class="error">{{message}}</span>
+        {% endif %}
+        {% endfor %}
+        
+        {% endwith %}
+        <br><br>
       
           <label for="password">
             Password:
-            <input type="text" id="password" name="password"/>
-          </label><br><br>
-
+            <input type="password" id="password" name="password"/>
+          </label>  
+          {% with messages = get_flashed_messages(with_categories=True) %}
+        
+          {% for category,message in messages%}
+          {% if category == 'pw' %}
+          <span class="error">{{message}}</span>
+          {% endif %}
+          {% endfor %}
+          {% endwith %}
+          <br><br>
 
           <label for="verify">
             Verify:
-            <input type="text" id="verify" name="verify"/>
-          </label><br><br>
-
+            <input type="password" id="verify" name="verify"/>
+          </label>
+          {% with messages = get_flashed_messages(with_categories=True) %}
+        
+          {% for category,message in messages%}
+          {% if category == 'verify' %}
+          <span class="error">{{message}}</span>
+          {% endif %}
+          {% endfor %}
+          {% endwith %}
+          <br><br>
 
           <label for="email"> 
             E-mail (optional):
             <input type="text" id="email" name="email"/>
-          </label><br><br>
+          </label>
+          {% with messages = get_flashed_messages(with_categories=True) %}
+        
+          {% for category,message in messages%}
+          {% if category == 'email' %}
+          <span class="error">{{message}}</span>
+          {% endif %}
+          {% endfor %}
+          {% endwith %}
+          <br><br>
 
           <input type="submit" value="Sign Up"/>
     </form>
 
-
-{% if error %}
-  <p class='error'>{{ error }}</p>
-{% endif %}
+   
+    
 {% endblock %}
