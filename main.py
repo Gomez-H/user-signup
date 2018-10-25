@@ -14,9 +14,6 @@ def sign_up():
     new_pass = request.form['password']
     verify_password = request.form['verify']
     new_email = request.form['email']
-    space = " "
-    atsign = "@"
-    period = "."
     error = False
       
     if len(new_user) < 3 or len(new_user) > 20 or " " in new_user or new_user == "":
@@ -33,7 +30,7 @@ def sign_up():
         error = True
     
     if len(new_email) > 0:
-        if space in new_email or atsign not in new_email or period not in new_email:
+        if " " in new_email or "@" not in new_email or "." not in new_email or len(new_email)> 3:
             flash('Email not valid','email')
             error = True
     if error:
