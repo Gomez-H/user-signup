@@ -30,7 +30,7 @@ def sign_up():
         error = True
     
     if len(new_email) > 0:
-        if " " in new_email or "@" not in new_email or "." not in new_email or len(new_email)> 3:
+        if " " in new_email or "@" not in new_email or "." not in new_email or len(new_email)< 3 or len(new_email) >20:
             flash('Email not valid','email')
             error = True
     if error:
