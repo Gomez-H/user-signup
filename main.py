@@ -14,26 +14,38 @@ def sign_up():
     new_pass = request.form['password']
     verify_password = request.form['verify']
     new_email = request.form['email']
+    space = " "
+    atsign = "@"
+    period = "."
+    error = False
       
-    if new_user == "" or len(new_user) < 3 or len(new_user) >20 or " " in new_user:
+    if len(new_user) < 3 or len(new_user) > 20 or " " in new_user or new_user == "":
         flash('Username not valid','us')
-        #return redirect('/')
+        error = True
+        
     if new_pass == "" or len(new_pass) < 3 or len(new_pass) >20 or " " in new_pass:
         flash('Password not valid','pw')
-        #return redirect('/')   
+        error = True
+        
+        
     if verify_password != new_pass or verify_password == "":
         flash('Passwords do not match','verify')
-        #return redirect('/')
-    if " " in new_email or "@" not in new_email or "." not in new_email:
-        flash('Email not valid','email')
-        return redirect('/')
+        error = True
+    
+    if len(new_email) > 0:
+        if space in new_email or atsign not in new_email or period not in new_email:
+            flash('Email not valid','email')
+            error = True
+    if error:
+        return render_template('forms.html', new_user=new_user, new_email=new_email)
+            
     else: 
         return render_template('welcome.html', new_user=new_user)         
 
 @app.route("/", methods=['GET', 'POST'])
 def index():
-     new_user = request.form.get('username')
-     return render_template('forms.html', new_user=new_user)
+     
+     return render_template('forms.html')
      
 
 app.run()

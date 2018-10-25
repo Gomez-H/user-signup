@@ -7,7 +7,7 @@
     <form action="/signup" method='post'>
         <label for="username">
             Username:</label>
-            <input type="text" id="username" name="username" value="{{new_user}}"/>
+            <input type="text" id="username" name="username" value="{{ new_user }}"/>
         
         {% with messages = get_flashed_messages(with_categories=True) %}
         
@@ -50,7 +50,7 @@
 
           <label for="email"> 
             E-mail (optional):
-            <input type="text" id="email" name="email"/>
+            <input type="text" id="email" name="email" value="{{ new_email }}"/>
           </label>
           {% with messages = get_flashed_messages(with_categories=True) %}
         
